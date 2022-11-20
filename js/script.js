@@ -1,5 +1,10 @@
 'use strict'
 {
+
+const optArticleSelector = '.post';
+const optTitleSelector = '.post-title';
+const optTitleListSelector = '.titles';
+
 const titleClickHandler = function(event){
     const clickedElement = this;
     event.preventDefault();
@@ -7,7 +12,7 @@ const titleClickHandler = function(event){
     const activeLinks = document.querySelectorAll('.titles a.active');
 
     for(let activeLink of activeLinks){
-    activeLink.classList.remove('active');
+      activeLink.classList.remove('active');
     }
     
     clickedElement.classList.add('active');
@@ -25,11 +30,7 @@ const titleClickHandler = function(event){
 
   }
 
-  const optArticleSelector = '.post';
-  const optTitleSelector = '.post-title';
-  const optTitleListSelector = '.titles';
-
-  function generateTitleLinks() {
+  const generateTitleLinks = function() {
     
     document.querySelector(optTitleListSelector).innerHTML = '';
 
@@ -41,9 +42,9 @@ const titleClickHandler = function(event){
         const articleId = article.getAttribute('id');
         const articleTitle = article.querySelector(optTitleSelector).innerHTML;
         const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-        const position = document.querySelector('.titles')
+        const titlesSelector = document.querySelector('.titles')
         
-        position.insertAdjacentHTML('beforeend', linkHTML);
+        titlesSelector.insertAdjacentHTML('beforeend', linkHTML);
     }
     
     const links = document.querySelectorAll('.titles a');
