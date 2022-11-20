@@ -123,3 +123,28 @@ body {
     margin: 0 10px 0 0;
   }
 }
+.list > a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tag-size-5 {
+  font-size: 24px;
+  color: green;
+}
+.tag-size-4 {
+  font-size: 22px;
+  color: blueviolet;
+}
+.tag-size-3 {
+  font-size: 20px;
+  color: black;
+}
+.tag-size-2 {
+  font-size: 18px;
+  color: red;
+}
+.tag-size-1 {
+  font-size: 16px;
+  color: blueviolet;
+}
