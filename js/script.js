@@ -172,28 +172,28 @@
     let allAuthors = {};
     const articles = document.querySelectorAll(opts.articleSelector);
     for(let article of articles){
-      const authorWrapper = article.querySelector('.post-title');
-      const getAuthor = article.getAttribute('data-author');
-      const authorHTMLData = {author: getAuthor};
+      const postTitle = article.querySelector(opts.titleSelector);
+      const authorName = article.getAttribute('data-author');
+      const authorHTMLData = {author: authorName};
       const authorLink = templates.authorLink(authorHTMLData);
 
-      if(!allAuthors[getAuthor]){
-        allAuthors[getAuthor] = 1;
+      if(!allAuthors[authorName]){
+        allAuthors[authorName] = 1;
       } else {
-        allAuthors[getAuthor]++;
+        allAuthors[authorName]++;
       }
 
-      authorWrapper.insertAdjacentHTML('afterend', authorLink);
+      postTitle.insertAdjacentHTML('afterend', authorLink);
     }
     const authorList = document.querySelector(opts.authorsListSelector);
     const authorsParams = calculateParams(allAuthors);
     const allAuthorsData = {authors: []};
 
-    for(let getAuthor in allAuthors){
+    for(let authorName in allAuthors){
       allAuthorsData.authors.push({
-        author: getAuthor,
-        count: allAuthors[getAuthor],
-        className: calculateClass(allAuthors[getAuthor], authorsParams)
+        author: authorName,
+        count: allAuthors[authorName],
+        className: calculateClass(allAuthors[authorName], authorsParams)
       });
     }
     authorList.innerHTML = templates.authorCloudLink(allAuthorsData);
@@ -208,7 +208,7 @@
     const clickedElement = this;
     const href = clickedElement.getAttribute('href');
     const author = href.replace('#author-', '');
-    const activeAuthor = document.querySelectorAll('.post a');
+    const activeAuthor = document.querySelectorAll('.post a, .authors a');
 
     for(let link of activeAuthor){
       link.classList.remove('active');
@@ -224,7 +224,7 @@
   };
 
   const addClickListenersToAuthors = function(){
-    const links = document.querySelectorAll('.post a');
+    const links = document.querySelectorAll('.post a, .authors a');
 
     for(let link of links){
       link.addEventListener('click', authorClickHandler);
